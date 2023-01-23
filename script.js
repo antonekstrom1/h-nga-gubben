@@ -77,17 +77,16 @@ function generateWord() {
     let wordContainer = document.querySelector(".word"); //Creates a container for the activeWord
     activeWord = availableWords[randomIndex]; //Set active word to random word from list availableWords through random index.
     wordContainer.innerHTML = activeWord; //Insert activeWord to wordContainer
-
-   
+       
     usedWords.push(activeWord); //Adds activeWord to usedWords
     availableWords.splice(randomIndex, 1); //Removes activeWord from 
 };
 
-function checkLetter() {
-    document.addEventListener("keydown", function(letter) {
-        console.log("Key pressed: " + letter.key);
-    });
-}
+// function checkLetter() {
+//     document.addEventListener("keydown", function(letter) {
+//         console.log("Key pressed: " + letter.key);
+//     });
+// }
 
 generateWord();
 
@@ -96,27 +95,8 @@ alphabet.forEach((letter) => {
     key.classList.add("key");
     key.innerHTML = letter;
     document.querySelector(".keyboard").append(key);
+
+    key.addEventListener("click", ()=> {
+      //create function checkLetter
+    });
 });
-
-
-
-// function createCard (list) {
-//     for (let i = 0; i < pokemons.length; i++) {
-//         pokemon = pokemons[i]
-
-//        let color = getColor(pokemon.type);
-//        console.log(color);
-
-//         let pokemonCard = document.createElement("article");
-//         pokemonCard.classList.add("card", pokemon.name);
-    
-//         pokemonCard.innerHTML = `
-//         <div class="colorBox ${color}"></div>
-//         <section class="pokemonSpec">
-//             <h4>${pokemon.name}</h4>
-//             <p>${pokemon.cp} CP</p>
-//         </section>
-//         `;
-//         document.querySelector(".placeholder").appendChild(pokemonCard);
-//     };
-// };
