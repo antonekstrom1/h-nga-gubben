@@ -90,3 +90,33 @@ function checkLetter() {
 }
 
 generateWord();
+
+alphabet.forEach((letter) => {
+    let key = document.createElement("div");
+    key.classList.add("key");
+    key.innerHTML = letter;
+    document.querySelector(".keyboard").append(key);
+});
+
+
+
+// function createCard (list) {
+//     for (let i = 0; i < pokemons.length; i++) {
+//         pokemon = pokemons[i]
+
+//        let color = getColor(pokemon.type);
+//        console.log(color);
+
+//         let pokemonCard = document.createElement("article");
+//         pokemonCard.classList.add("card", pokemon.name);
+    
+//         pokemonCard.innerHTML = `
+//         <div class="colorBox ${color}"></div>
+//         <section class="pokemonSpec">
+//             <h4>${pokemon.name}</h4>
+//             <p>${pokemon.cp} CP</p>
+//         </section>
+//         `;
+//         document.querySelector(".placeholder").appendChild(pokemonCard);
+//     };
+// };

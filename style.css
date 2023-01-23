@@ -120,3 +120,21 @@ section.game-over.show {
 .game-over > a:hover {
     opacity: 1;
 }
+
+/* Styling for keyboard */
+.keyboard {
+    display: flex;
+    gap: 1rem;
+}
+
+.key {
+    background-color: white;
+    padding: 8px 16px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+
+}
+
+.key:hover {
+    background-color: #ddd;
+}
