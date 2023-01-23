@@ -66,22 +66,21 @@ const alphabet = [ //Borde vara const istället?
 ];
 let guessedWords = [];
 let guessedLetters = [];
-let activeWord;
 let usedWords = [];
+let activeWord
+
+let count = 0;
+let points = 0;
 
 function generateWord() {
-    let randomIndex = (Math.floor(Math.random() * availableWords.length));
-    activeWord = availableWords[randomIndex];
-   
-    usedWords.push(activeWord);
-    availableWords.splice(randomIndex, 1);
-    
-    // console.log(usedWords);
-    // console.log(activeWord);
-    // console.log(availableWords);
+    let randomIndex = (Math.floor(Math.random() * availableWords.length)); //Gets random number between 0 and 4 (?) corresponding to an index.
+    let wordContainer = document.querySelector(".word"); //Creates a container for the activeWord
+    activeWord = availableWords[randomIndex]; //Set active word to random word from list availableWords through random index.
+    wordContainer.innerHTML = activeWord; //Insert activeWord to wordContainer
 
-    //Skriv ut lika många boxar som det finns bokstäver i ordet
-    
+   
+    usedWords.push(activeWord); //Adds activeWord to usedWords
+    availableWords.splice(randomIndex, 1); //Removes activeWord from 
 };
 
 function checkLetter() {
@@ -90,9 +89,4 @@ function checkLetter() {
     });
 }
 
-
-
 generateWord();
-
-//Man skulle kunna skriva ut order som genereras men att varje bokstav får opacity 0.
-//När man gissar rätt--> opacity 1.
