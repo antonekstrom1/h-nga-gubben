@@ -73,10 +73,28 @@ footer ul.word li {
     background: rgba(0,0,0,.1);
 }
 
+footer p {
+    display: flex;
+    justify-content: center;
+}
+
 p {
     color: rgba(0,0,0,.4);
     font-size: 1.2rem;
     margin: 1rem 0;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    width: 100px;
+    align-self: center;
+
+}
+
+.score {
+    display: flex;
+
 }
 
 section.game-win {
