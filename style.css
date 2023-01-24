@@ -40,6 +40,7 @@ footer {
 
 footer ul.nomatch {
     display: flex;
+    justify-content: center;
     margin: 0;
     padding: 0;
     height: 2rem;
@@ -78,6 +79,41 @@ p {
     margin: 1rem 0;
 }
 
+section.game-win {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(88, 198, 34, 0.9);
+    z-index: 999;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+section.game-win.show {
+    display: flex;
+}
+
+.game-win > h1 {
+    font-size: 6rem;
+    margin: 0;
+}
+
+.game-win > a {
+    background: white;
+    color: #222;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    margin-top: 4rem;
+    border-radius: .25rem;
+    opacity: .8;
+}
+
+.game-win > a:hover {
+    opacity: 1;
+}
 
 section.game-over {
     position: fixed;
@@ -137,4 +173,8 @@ section.game-over.show {
 
 .key:hover {
     background-color: #ddd;
+}
+
+.active {
+    display: none;
 }
