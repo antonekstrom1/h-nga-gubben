@@ -186,3 +186,8 @@ function newGame() {
   guessedContainer.replaceChildren(); //Removes all guessed letter som previous game
   document.querySelector(".score").innerHTML = ("Your score: ") + points; //Keeps the points
 };
+
+let resetBtn = document.querySelector("#reset");
+  resetBtn.addEventListener("click", () => {
+      location.reload();
+  });
