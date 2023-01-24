@@ -1,14 +1,4 @@
-/**
- För att toggla SVG:en
- document.querySelector('figure').classList.add('scaffold')
- document.querySelector('figure').classList.add('head')
- document.querySelector('figure').classList.add('body')
- document.querySelector('figure').classList.add('arms')
- document.querySelector('figure').classList.add('legs')
- */
-// Skapa en funktion som tar count som argument 
-
-const alphabet = [ //Borde vara const istället?
+let alphabet = [
   "A",
   "B",
   "C",
@@ -36,122 +26,124 @@ const alphabet = [ //Borde vara const istället?
   "Y",
   "Z",
 ];
-let availableWords = ["BANANA", "DOG", "POKEMON", "CLOUDS"]; //Ska den vara const?
-let availableLetters = [ //Borde vara const istället?
-  "A",
-  "B",
-  "C",
-  "D",
-  "E",
-  "F",
-  "G",
-  "H",
-  "I",
-  "J",
-  "K",
-  "L",
-  "M",
-  "N",
-  "O",
-  "P",
-  "Q",
-  "R",
-  "S",
-  "T",
-  "U",
-  "V",
-  "W",
-  "X",
-  "Y",
-  "Z",
-];
-let guessedWords = [];
-let guessedLetters = [];
-
-let usedWords = [];
-let activeWord
-let wordArray = [];
-let count = 0;
-let points = 0;
+let clickedLetter;
+let availableWords = ["BANANA", "DOG", "POKEMON", "CLOUDS"];
+let activeWord;
+let activeWordArray = [];
+let outputArray = [];
 let letterContainer;
 let guessedLetterContainer;
-let outputArray = []; // Array that is viewed in UI
-let clickedLetter;
+let count = 0;
+let points = 0;
 
+//Adds points to the score section
 document.querySelector(".score").innerHTML = ("Your score: ") + points;
 
+createKeyboard();
 generateWord();
 
-function generateWord() {
-  let randomIndex = (Math.floor(Math.random() * availableWords.length)); //Gets random number between 0 and 4 (?) corresponding to an index.
-  activeWord = availableWords[randomIndex];
-  wordArray = activeWord.split(""); //Changes activeWord to array.
-  console.log(wordArray);
-  for (let i = 0; i < wordArray.length; i++) {
-    outputArray.push(" ");
-  };
+//Function that creates a keyboard
+function createKeyboard() {
+  alphabet.forEach((letter) => {
+      //Creates a div for each key
+      let key = document.createElement("div");
+      key.classList.add("key"); //Class of key is added for styling
+      //Adds the letter to each key
+      key.innerHTML = letter;
+      //Adds the key to the keyboard
+      document.querySelector(".keyboard").append(key);  
 
-  updateLetterContainer(); //Creates boxes for each letter
+      //Add eventlistener to each key
+      key.addEventListener("click", () => {
+          clickedLetter = key.innerHTML;
+          key.setAttribute("class", "active") //When clicked active is added as class
 
-  usedWords.push(activeWord); //Adds activeWord to usedWords
-  availableWords.splice(randomIndex, 1); //Removes activeWord from availableWords
+          checkLetter();
+      });
+  });
 };
 
+//Function that generates a random word from the availableWords list
+function generateWord() {
+  let randomIndex = (Math.floor(Math.random() * availableWords.length)); 
+  activeWord = availableWords[randomIndex]; //This is a string
+  activeWordArray = activeWord.split(""); //This is an array
+
+  //Creates an empty array that will be visible in the UI. Has the same length as activeWordArray.
+  //Correct guessed letter will be added to this array.
+  for(let i = 0; i < activeWordArray.length; i++) {
+      outputArray.push(" ");
+  };
+
+  updateLetterContainer();
+
+  //Remove activeWord from availableWords
+  availableWords.splice(randomIndex, 1);
+};
+
+//Function that creates boxes/containers for each letter/item in outputArray.
 function updateLetterContainer() {
   let wordContainer = document.querySelector(".word");
-  wordContainer.replaceChildren(); //Removes all the boxes
-  for (let i = 0; i < outputArray.length; i++) {
-    letterContainer = document.createElement("li"); //Creates a listelement
-    wordContainer.append(letterContainer); //Adds listelement to the wordContainer
-    letterContainer.innerHTML = outputArray[i]; //Adds letter to listelement in wordContainer
+  wordContainer.replaceChildren(); //Removes all elements in order to render them again
+
+  //Create a list element for each letter in activeWord/outputArray
+  //Adds the list element to the wordContainer
+  //Adds the letter "value" to the list element in the wordContainer
+  for(let i = 0; i < outputArray.length; i++) {
+      letterContainer = document.createElement("li");
+      wordContainer.append(letterContainer);
+      letterContainer.innerHTML = outputArray[i];
   };
 };
 
-function updateGuessedContainer() {
+//Function that updates/adds a guessed letters to the "nomatch" section
+//Creates a list element for each guessed letter
+function updateGuessedContainer() { 
   let guessedContainer = document.querySelector(".nomatch");
   guessedLetterContainer = document.createElement("li");
   guessedContainer.append(guessedLetterContainer);
   guessedLetterContainer.innerHTML = clickedLetter;
-}
+};
 
-//Creates keyboard and adds an eventlistener to each key - kan vi bryta ut funktionerna?
-alphabet.forEach((letter) => {
-  let key = document.createElement("div");
-  key.classList.add("key");
-  key.innerHTML = letter;
-  document.querySelector(".keyboard").append(key);
+function checkLetter() {
+  for(let i = 0; i < activeWordArray.length; i++) {
+      //Loops through the activeWordArray and checks if the clickedLetter matches any of the items in the array
+     //If matched the letter is added to the outputArray at the correct index, and is visible in the UI
+      if(activeWordArray[i] === clickedLetter) {
+          outputArray[i] = clickedLetter;
+          updateLetterContainer()
+      };
+  };
 
-  key.addEventListener("click", () => {
-    clickedLetter = key.innerHTML; // Kanske bryta ut funktionen till checkLetter??
-    key.setAttribute("class", "active"); //Adds class active to clicked letter
-
-    for (let i = 0; i < wordArray.length; i++) {
-      if (wordArray[i] === clickedLetter) {
-        outputArray[i] = clickedLetter;
-        updateLetterContainer();
-      }
-    };
-    if (wordArray.includes(clickedLetter) == false) {
-      updateGuessedContainer();
-      count = count + 1;
-      hangman(count); //Draw hangman component
-    }
-
-    if (compareArrays(wordArray, outputArray)) {
+  //If activeWordArray is equal to the outputArray the user has won and gets one point
+  //The functions compareArrays takes two arrays as argument. It converts them to strings and returns true if equal.
+  if(compareArrays(activeWordArray,outputArray)) {
       points = points + 1;
-      pointContainer.innerHTML = points;
+      document.querySelector(".score").innerHTML = ("Your score: ") + points;
       gameWin();
-    }
-  });
-});
+  };
 
+  //If the clickedLetter is not matched to any items in the activeWordArray
+  //The the clickedLetter is added to the updateGuessedContainer and visibile in the UI
+  if(activeWordArray.includes(clickedLetter) == false) {
+      updateGuessedContainer();
 
-function compareArrays(arr1, arr2) {
+      //The count keeps track of the number of lives the user has. Each wrong guess adds one to the count.
+      //When count reaches 5 the game is lost 
+      count = count + 1;
+
+      //function that draw a hangman component when guessed letter is wrong
+      hangman(count);
+  };
+};
+
+//The functions compareArrays takes two arrays as argument. It converts them to strings and returns true if equal.
+function compareArrays(arr1,arr2) {
   return arr1.toString() === arr2.toString();
 };
 
 function hangman(count) {
-  if (count === 1) {
+  if(count === 1){
     document.querySelector('figure').classList.add('scaffold')
   } else if (count === 2) {
     document.querySelector('figure').classList.add('head')
@@ -166,22 +158,31 @@ function hangman(count) {
 };
 
 function gameOver() {
-  document.querySelector('.game-over').classList.add('show');
+  document.querySelector(".game-over").classList.add("show"); //Adds the show-class to active game-over styling
   document.querySelector(".game-over").querySelector("p").querySelector("b").innerText = activeWord;
   let retryBtn = document.querySelector(".retry")
-  retryBtn.addEventListener('click', () => {
-    location.reload(); //Borde vara new game istället dvs bbehålla poäng.
+  retryBtn.addEventListener("click", () => {
+      // location.reload();
+      document.querySelector(".game-over").classList.remove("show");
+      newGame();
   });
 };
 
 function gameWin() {
-  document.querySelector('.game-win').classList.add('show');
-  retryBtn = document.querySelector(".retry")
-  retryBtn.addEventListener('click', () => {
-    location.reload(); //Borde vara new game istället dvs bbehålla poäng. //VARFÖR FUNKAR DET INTE ATT RELODA?
+  document.querySelector(".game-win").classList.add("show");
+  let retryBtn = document.querySelector(".play-again")
+  retryBtn.addEventListener("click", () => {
+      // location.reload();
+      document.querySelector(".game-win").classList.remove("show");
+      newGame();
   });
 };
 
-
-//New game funktion
-//Använda ord ska inte genereras igen
+function newGame() {
+  document.querySelector(".keyboard").replaceChildren();
+  wordContainer.replaceChildren();
+  createKeyboard();
+  generateWord();
+  guessedContainer.replaceChildren(); //Removes all guessed letter som previous game
+  document.querySelector(".score").innerHTML = ("Your score: ") + points; //Keeps the points
+};

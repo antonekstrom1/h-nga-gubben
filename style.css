@@ -89,12 +89,14 @@ button {
     justify-content: center;
     width: 100px;
     align-self: center;
-
+    border: none;
+    background-color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
 }
 
 .score {
     display: flex;
-
 }
 
 section.game-win {
