@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 body {
@@ -87,26 +86,10 @@ p {
     margin: 1rem 0;
 }
 
-button {
-    display: flex;
-    justify-content: center;
-    width: 100px;
-    align-self: center;
-    border: none;
-    background-color: white;
-    padding: 0.5rem;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-button:hover {
-    background-color: #ddd;
-}
-
-.score {
-    display: flex;
+/*Styiling for icon on the "buttons"*/
+i {
+    font-size: 1.3rem;
+    margin-left: 0.6rem;
 }
 
 section.game-win {
@@ -189,18 +172,19 @@ section.game-over.show {
 
 /* Styling for keyboard */
 .keyboard {
-    display: flex;
-    gap: 1rem;
     font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
 .key {
     background-color: white;
-    padding: 8px 16px 10px;
     cursor: pointer;
     border-radius: 5px;
-
+    padding: 0.5rem 1rem;
 }
 
 .key:hover {
@@ -211,7 +195,27 @@ section.game-over.show {
     display: none;
 }
 
-i {
-    font-size: 20px;
-    margin: 0 0 0 10px;
+/*Score section*/
+.score {
+    display: flex;
 }
+
+/*Styling for the reset button*/
+#reset {
+    width: 6.3rem;
+    background-color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
+}
+
+#reset.hover {
+    background-color: #ddd;
+}
+
