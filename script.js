@@ -26,8 +26,8 @@ let alphabet = [
   "Y",
   "Z",
 ];
+let availableWords = ["BANANA", "DOG", "POKEMON", "CLOUDS", "COMPUTER", "SWEDEN", "BREAD", "CAR", "HEART", "GUITAR", "JAVASCRIPT"];
 let clickedLetter;
-let availableWords = ["BANANA", "DOG", "POKEMON", "CLOUDS"];
 let activeWord;
 let activeWordArray = [];
 let outputArray = [];
@@ -112,14 +112,16 @@ function checkLetter() {
       if(activeWordArray[i] === clickedLetter) {
           outputArray[i] = clickedLetter;
           updateLetterContainer()
+
+          //For every correct answer the user gets one point
+          points = points + 1;
+          document.querySelector(".score").innerHTML = ("Your score: ") + points;
       };
   };
 
   //If activeWordArray is equal to the outputArray the user has won and gets one point
   //The functions compareArrays takes two arrays as argument. It converts them to strings and returns true if equal.
   if(compareArrays(activeWordArray,outputArray)) {
-      points = points + 1;
-      document.querySelector(".score").innerHTML = ("Your score: ") + points;
       gameWin();
   };
 
@@ -134,6 +136,10 @@ function checkLetter() {
 
       //function that draw a hangman component when guessed letter is wrong
       hangman(count);
+
+      //For every wrong guess the user looses one point
+      points = points - 1;
+      document.querySelector(".score").innerHTML = ("Your score: ") + points;
   };
 };
 
@@ -162,32 +168,37 @@ function gameOver() {
   document.querySelector(".game-over").querySelector("p").querySelector("b").innerText = activeWord;
   let retryBtn = document.querySelector(".retry")
   retryBtn.addEventListener("click", () => {
-      // location.reload();
+      location.reload();
       document.querySelector(".game-over").classList.remove("show");
-      newGame();
+      // newGame();
   });
 };
 
 function gameWin() {
   document.querySelector(".game-win").classList.add("show");
+
+  //Total points are shown in the end
+  document.querySelector(".game-win").querySelector("p").querySelector("b").innerText = points;
   let retryBtn = document.querySelector(".play-again")
   retryBtn.addEventListener("click", () => {
-      // location.reload();
+      location.reload();
       document.querySelector(".game-win").classList.remove("show");
-      newGame();
+      // newGame();
   });
-};
-
-function newGame() {
-  document.querySelector(".keyboard").replaceChildren();
-  wordContainer.replaceChildren();
-  createKeyboard();
-  generateWord();
-  guessedContainer.replaceChildren(); //Removes all guessed letter som previous game
-  document.querySelector(".score").innerHTML = ("Your score: ") + points; //Keeps the points
 };
 
 let resetBtn = document.querySelector("#reset");
   resetBtn.addEventListener("click", () => {
       location.reload();
-  });
+});
+
+
+
+// function newGame() {
+//   document.querySelector(".keyboard").replaceChildren();
+//   wordContainer.replaceChildren();
+//   createKeyboard();
+//   generateWord();
+//   guessedContainer.replaceChildren(); //Removes all guessed letter som previous game
+//   document.querySelector(".score").innerHTML = ("Your score: ") + points; //Keeps the points
+// };

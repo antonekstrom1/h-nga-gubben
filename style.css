@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
 body {
     margin: 0;
     height: 100vh;
@@ -94,6 +97,8 @@ button {
     padding: 0.5rem;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 button:hover {
@@ -108,7 +113,7 @@ section.game-win {
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background: rgba(88, 198, 34, 0.9);
+    background-color: #009900;
     z-index: 999;
     color: white;
     flex-direction: column;
@@ -186,6 +191,8 @@ section.game-over.show {
 .keyboard {
     display: flex;
     gap: 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
 }
 
 .key {
@@ -202,4 +209,9 @@ section.game-over.show {
 
 .active {
     display: none;
+}
+
+i {
+    font-size: 20px;
+    margin: 0 0 0 10px;
 }

@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hangman</title>
     <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/ee392697f3.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <title>Hangman</title>
 </head>
 <body>
     <section class="game-over">
         <h1>Game over!</h1>
         <p>The word we were looking for was <b></b>.</p>
-        <a href="#" class="retry">Try again</a>
+        <a href="#" class="retry">Try again <i class="fa-solid fa-rotate-right"></i></a>
     </section>
     <section class="game-win">
         <h1>YOU WON!</h1>
-        <a href="#" class="play-again">Play again</a>
+        <p>You got <b></b> points!</p>
+        <a href="#" class="play-again">Play again <i class="fa-solid fa-rotate-right"></i></a>
     </section>
     <main>
         <figure class="">
@@ -33,7 +35,7 @@
             <ul class="word"></ul>
             <article class="keyboard"></article>
         <p>Click a letter or press a key on your keyboard</p>
-        <button id="reset">Reset ↺</button>
+        <button id="reset">Reset <i class="fa-solid fa-rotate-right"></i></button>
         <p class="score">Your score: </p>
     </main>
     <script src="script.js"></script>
