@@ -148,6 +148,7 @@ function compareArrays(arr1,arr2) {
   return arr1.toString() === arr2.toString();
 };
 
+//Function that adds a hangman part based on count/wrong guess
 function hangman(count) {
   if(count === 1){
     document.querySelector('figure').classList.add('scaffold')
@@ -164,10 +165,10 @@ function hangman(count) {
 };
 
 function gameOver() {
-  document.querySelector(".game-over").classList.add("show"); //Adds the show-class to active game-over styling
+  document.querySelector(".game-over").classList.add("show"); //Adds the show-class to activate game-over styling
   document.querySelector(".game-over").querySelector("p").querySelector("b").innerText = activeWord;
   let retryBtn = document.querySelector(".retry")
-  retryBtn.addEventListener("click", () => {
+  retryBtn.addEventListener("click", () => { //Page reloads and game starts over when button is clicked
       location.reload();
       document.querySelector(".game-over").classList.remove("show");
       // newGame();
@@ -175,12 +176,12 @@ function gameOver() {
 };
 
 function gameWin() {
-  document.querySelector(".game-win").classList.add("show");
+  document.querySelector(".game-win").classList.add("show"); //Adds the show-class to activate game-win styling
 
   //Total points are shown in the end
   document.querySelector(".game-win").querySelector("p").querySelector("b").innerText = points;
   let retryBtn = document.querySelector(".play-again")
-  retryBtn.addEventListener("click", () => {
+  retryBtn.addEventListener("click", () => { //Page reloads and game starts over when button is clicked
       location.reload();
       document.querySelector(".game-win").classList.remove("show");
       // newGame();
