@@ -52,8 +52,31 @@ let points = 0;
 
 let wordContainer = document.querySelector(".word");
 let guessedContainer = document.querySelector(".nomatch");
+let retryBtn = document.querySelector(".retry");
+let playAgainBtn = document.querySelector(".play-again");
+let resetGameBtn = document.querySelector(".reset-game");
+let resetBtn = document.querySelector("#reset");
 
 newGame(); //Initiates a new game
+
+//Adds an eventlistener to the retry, play again and reset btns that initiates a new game.
+retryBtn.addEventListener("click", () => {
+  document.querySelector(".game-over").classList.remove("show");
+  newGame(); //Calls newGame function to start a new game
+});
+playAgainBtn.addEventListener("click", () => {
+  document.querySelector(".game-win").classList.remove("show");
+  newGame(); //Calls newGame function to start a new game
+});
+resetGameBtn.addEventListener("click", () => {
+  document.querySelector(".reset-game").classList.remove("show");
+  location.reload(); //Reloads the page and a new game starts. Points are set to zero
+});
+
+//Page reloads and game starts over when button is clicked. The score is reset to zero
+resetBtn.addEventListener("click", () => {
+  location.reload();
+});
 
 //Function that starts a new game. Previous points are saved.
 function newGame() {
@@ -63,6 +86,8 @@ function newGame() {
   guessedContainer.replaceChildren(); //Removes all guessed letters from previous game
   document.querySelector(".score").innerHTML = "Your score: " + points; //Keeps the points
   outputArray = []; //outputArray i emptied
+  activeWord = [];
+  activeWordArray = [];
 
   createKeyboard(); //Renders a new complete keyboard
   generateWord(); //Generates a new word and associated word- and letter containers
@@ -91,20 +116,25 @@ function createKeyboard() {
 
 //Function that generates a random word from the availableWords list
 function generateWord() {
-  let randomIndex = Math.floor(Math.random() * availableWords.length);
-  activeWord = availableWords[randomIndex]; //This is a string
-  activeWordArray = activeWord.split(""); //This is an array
+  if (availableWords.length >= 1) {
+    let randomIndex = Math.floor(Math.random() * availableWords.length);
+    activeWord = availableWords[randomIndex]; //This is a string
 
-  //Creates an empty array that will be visible in the UI. Has the same length as activeWordArray.
-  //Correct guessed letter will be added to this array.
-  for (let i = 0; i < activeWordArray.length; i++) {
-    outputArray.push(" ");
+    activeWordArray = activeWord.split(""); //This is an array
+
+    //Creates an empty array that will be visible in the UI. Has the same length as activeWordArray.
+    //Correct guessed letter will be added to this array.
+    for (let i = 0; i < activeWordArray.length; i++) {
+      outputArray.push(" ");
+    }
+
+    //Remove activeWord from availableWords
+    availableWords.splice(randomIndex, 1);
+
+    updateLetterContainer();
+  } else {
+    resetGame();
   }
-
-  updateLetterContainer();
-
-  //Remove activeWord from availableWords
-  availableWords.splice(randomIndex, 1);
 }
 
 //Function that creates boxes/containers for each letter/item in outputArray.
@@ -195,30 +225,18 @@ function gameOver() {
     .querySelector(".game-over")
     .querySelector("p")
     .querySelector("b").innerText = activeWord;
-  let retryBtn = document.querySelector(".retry");
-  retryBtn.addEventListener("click", () => {
-    document.querySelector(".game-over").classList.remove("show");
-    newGame(); //Calls newGame function to start a new game
-  });
 }
 
 function gameWin() {
   document.querySelector(".game-win").classList.add("show"); //Adds the show-class to activate game-win styling
 
-  //Total points are shown in the end
+  // Total points are shown in the end
   document
     .querySelector(".game-win")
     .querySelector("p")
     .querySelector("b").innerText = points;
-  let retryBtn = document.querySelector(".play-again");
-  retryBtn.addEventListener("click", () => {
-    document.querySelector(".game-win").classList.remove("show");
-    newGame(); //Calls newGame function to start a new game
-  });
 }
 
-//Page reloads and game starts over when button is clicked. The score is reset to zero
-let resetBtn = document.querySelector("#reset");
-resetBtn.addEventListener("click", () => {
-  location.reload();
-});
+function resetGame() {
+  document.querySelector(".reset-game").classList.add("show"); //Adds the show-class to activate reset-game styling
+}

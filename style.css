@@ -112,51 +112,6 @@ i {
 
 /* .-.-.-.-.-.-.-.-.-.-.-.-.-. //END STYLING ON BUTTONS .-.-.-.-.-.-.-.-.-. */
 
-
-/* .-.-.-.-.-.-.-.-.-.-.-.-.-. SECTION GAME WIN .-.-.-.-.-.-.-.-.-. */
-
-section.game-win {
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: #009900;
-    z-index: 999;
-    color: white;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    display: none;
-}
-
-section.game-win.show {
-    display: flex;
-}
-
-.game-win > h1 {
-    font-size: 6rem;
-    margin: 0;
-}
-
-.game-win > a {
-    background: white;
-    color: #222;
-    text-decoration: none;
-    padding: 1rem 2rem;
-    margin-top: 4rem;
-    border-radius: .25rem;
-    opacity: .8;
-}
-
-.game-win > a:hover {
-    opacity: 1;
-}
-
-.game-win > p {
-    color: #fff;
-}
-
-/* .-.-.-.-.-.-.-.-.-.-.-.-.-. //END SECTION GAME WIN .-.-.-.-.-.-.-.-.-. */
-
 /* .-.-.-.-.-.-.-.-.-.-.-.-.-. SECTION GAME OVER .-.-.-.-.-.-.-.-.-. */
 
 section.game-over {
@@ -202,6 +157,94 @@ section.game-over.show {
 }
 
 /* .-.-.-.-.-.-.-.-.-.-.-.-.-. //END SECTION GAME OVER .-.-.-.-.-.-.-.-.-. */
+
+/* .-.-.-.-.-.-.-.-.-.-.-.-.-. SECTION GAME WIN .-.-.-.-.-.-.-.-.-. */
+
+section.game-win {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #009900;
+    z-index: 999;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+section.game-win.show {
+    display: flex;
+}
+
+.game-win > h1 {
+    font-size: 6rem;
+    margin: 0;
+}
+
+.game-win > a {
+    background: white;
+    color: #222;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    margin-top: 4rem;
+    border-radius: .25rem;
+    opacity: .8;
+}
+
+.game-win > a:hover {
+    opacity: 1;
+}
+
+.game-win > p {
+    color: #fff;
+}
+
+/* .-.-.-.-.-.-.-.-.-.-.-.-.-. //END SECTION GAME WIN .-.-.-.-.-.-.-.-.-. */
+
+/* .-.-.-.-.-.-.-.-.-.-.-.-.-. SECTION RESET GAME .-.-.-.-.-.-.-.-.-. */
+
+section.reset-game {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,.9);
+    z-index: 999;
+    color: white;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+section.reset-game.show {
+    display: flex;
+}
+
+.reset-game > h1 {
+    font-size: 6rem;
+    margin: 0;
+}
+
+.reset-game > a {
+    background: white;
+    color: #222;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    margin-top: 4rem;
+    border-radius: .25rem;
+    opacity: .8;
+}
+
+.reset-game > a:hover {
+    opacity: 1;
+}
+
+.reset-game > p {
+    color: #fff;
+}
+
+/* .-.-.-.-.-.-.-.-.-.-.-.-.-. //END SECTION RESET GAME .-.-.-.-.-.-.-.-.-. */
 
 /* .-.-.-.-.-.-.-.-.-.-.-.-.-. STYLING FOR KEYBOARD .-.-.-.-.-.-.-.-.-. */
 
