@@ -2,6 +2,8 @@
 
 # Hängagubben.nu | Spela gratis online!
 Öva stavning och alfabetet med spelet Hänga gubbe. Detta kunskapsspel är gratis och spelas online.
+ 
+https://hangagubben-nu.netlify.app/
 
 # Group project exam
 This is a groupproject made in the JavaScript course.
